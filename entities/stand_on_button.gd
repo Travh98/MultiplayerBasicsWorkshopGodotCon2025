@@ -32,7 +32,7 @@ func on_body_entered(body: Node2D):
 		anim_player.play("spin_button")
 
 
-func on_body_exited(body: Node2D):
+func on_body_exited(_body: Node2D):
 	if not is_multiplayer_authority(): return
 	
 	if detect_stander_area.get_overlapping_bodies().size() == 0:

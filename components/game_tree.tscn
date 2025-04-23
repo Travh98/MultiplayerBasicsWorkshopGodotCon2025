@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bbt71rqh7m6g5" path="res://levels/castle_level.tscn" id="1_q3u5y"]
 [ext_resource type="PackedScene" uid="uid://01tmnbmsfsnf" path="res://entities/player.tscn" id="2_ooffa"]
-[ext_resource type="Script" uid="uid://bxmh3qxko2oq8" path="res://ui/gui_mgr.gd" id="3_t4jwi"]
+[ext_resource type="Script" path="res://ui/gui_mgr.gd" id="3_t4jwi"]
 [ext_resource type="PackedScene" uid="uid://cnc7h6xdn8j2b" path="res://ui/start_connect_menu.tscn" id="4_d04qd"]
 
 [node name="GameTree" type="Node"]
