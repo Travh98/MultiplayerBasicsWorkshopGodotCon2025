@@ -7,6 +7,7 @@ extends Node
 @onready var anim_player: AnimationPlayer = $"../AnimationPlayer"
 @onready var player_name_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PlayerNameLabel"
 @onready var peer_id_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PeerIdLabel"
+@onready var camera_2d: Camera2D = $"../Camera2D"
 
 
 ## Speed of the player in pixels per second
@@ -14,6 +15,8 @@ extends Node
 
 
 func _ready():
+	if not is_multiplayer_authority(): return
+	camera_2d.make_current()
 	pass
 
 

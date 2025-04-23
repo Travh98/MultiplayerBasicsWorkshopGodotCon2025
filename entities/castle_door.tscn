@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbue422bqyjtx"]
+[gd_scene load_steps=9 format=3 uid="uid://dbue422bqyjtx"]
 
 [ext_resource type="Texture2D" uid="uid://duln8g2kn8gbf" path="res://assets/kenney_assets/tile/medievalTile_02.png" id="1_aylb7"]
 [ext_resource type="Script" uid="uid://cdugv0uxucdi3" path="res://entities/castle_door.gd" id="1_wy2ja"]
@@ -68,6 +68,14 @@ _data = {
 &"open_door": SubResource("Animation_2htw3")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wy2ja"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:is_open")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="CastleDoor" type="Node2D"]
 script = ExtResource("1_wy2ja")
 
@@ -94,3 +102,6 @@ texture = ExtResource("2_2htw3")
 libraries = {
 &"": SubResource("AnimationLibrary_yolcc")
 }
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wy2ja")

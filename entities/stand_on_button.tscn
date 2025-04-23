@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmqlu7fe6kdui"]
+[gd_scene load_steps=8 format=3 uid="uid://bmqlu7fe6kdui"]
 
 [ext_resource type="Script" uid="uid://cptxv4baw3i6y" path="res://entities/stand_on_button.gd" id="1_d62mg"]
 [ext_resource type="Texture2D" uid="uid://cio8uvnpg56j0" path="res://icon.svg" id="1_ng5be"]
@@ -44,6 +44,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_ng5be"]
 radius = 48.0416
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d62mg"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="StandOnButton" type="Node2D"]
 script = ExtResource("1_d62mg")
 
@@ -65,3 +70,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectStanderArea"]
 shape = SubResource("CircleShape2D_ng5be")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_d62mg")

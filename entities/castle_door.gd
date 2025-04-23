@@ -7,7 +7,7 @@ extends Node2D
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
-var is_open: bool = false
+@export var is_open: bool = false
 
 func _ready():
 	if not is_multiplayer_authority(): return

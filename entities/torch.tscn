@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmk068mfcujh2"]
+[gd_scene load_steps=8 format=3 uid="uid://dmk068mfcujh2"]
 
 [ext_resource type="Texture2D" uid="uid://i8om7ox7xivg" path="res://assets/kenney_assets/tile/medievalTile_13.png" id="1_i6b8o"]
 [ext_resource type="Script" uid="uid://jlprxag0dt5k" path="res://entities/torch.gd" id="1_kyii1"]
@@ -41,6 +41,11 @@ _data = {
 &"torch_burning": SubResource("Animation_kyii1")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kyii1"]
+properties/0/path = NodePath("FlameSprite:visible")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="Torch" type="Node2D"]
 script = ExtResource("1_kyii1")
 
@@ -61,3 +66,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_4irgs")
 }
 autoplay = "torch_burning"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kyii1")
