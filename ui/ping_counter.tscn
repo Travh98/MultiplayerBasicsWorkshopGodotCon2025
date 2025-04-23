@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpd0nuph6m5gd"]
+
+[ext_resource type="Script" path="res://ui/ping_counter.gd" id="1_pb6n0"]
+
+[node name="PingCounter" type="HBoxContainer"]
+alignment = 2
+script = ExtResource("1_pb6n0")
+
+[node name="PingLabel" type="Label" parent="."]
+layout_mode = 2
+text = "[ping]"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "ms ping"

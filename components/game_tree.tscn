@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://xhma3wlrqehr"]
+[gd_scene load_steps=5 format=3 uid="uid://xhma3wlrqehr"]
 
 [ext_resource type="PackedScene" uid="uid://bbt71rqh7m6g5" path="res://levels/castle_level.tscn" id="1_q3u5y"]
 [ext_resource type="PackedScene" uid="uid://01tmnbmsfsnf" path="res://entities/player.tscn" id="2_ooffa"]
+[ext_resource type="Script" uid="uid://bxmh3qxko2oq8" path="res://ui/gui_mgr.gd" id="3_t4jwi"]
+[ext_resource type="PackedScene" uid="uid://cnc7h6xdn8j2b" path="res://ui/start_connect_menu.tscn" id="4_d04qd"]
 
 [node name="GameTree" type="Node"]
 
@@ -12,3 +14,8 @@
 [node name="PlayersMgr" type="Node" parent="."]
 
 [node name="Player" parent="PlayersMgr" instance=ExtResource("2_ooffa")]
+
+[node name="GuiMgr" type="Node" parent="."]
+script = ExtResource("3_t4jwi")
+
+[node name="StartConnectMenu" parent="GuiMgr" instance=ExtResource("4_d04qd")]
