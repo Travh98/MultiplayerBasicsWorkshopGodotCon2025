@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct3n84kthpny0"]
+
+[ext_resource type="Script" uid="uid://cvvp2pnf02iv8" path="res://components/server_connection/connection_timeout.gd" id="1_lmhyc"]
+
+[node name="ConnectionTimeout" type="Node"]
+script = ExtResource("1_lmhyc")
+
+[node name="HeartbeatTimer" type="Timer" parent="."]

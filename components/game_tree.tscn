@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://xhma3wlrqehr"]
+[gd_scene load_steps=5 format=3 uid="uid://xhma3wlrqehr"]
 
 [ext_resource type="PackedScene" uid="uid://bbt71rqh7m6g5" path="res://levels/castle_level.tscn" id="1_q3u5y"]
 [ext_resource type="PackedScene" uid="uid://01tmnbmsfsnf" path="res://entities/player.tscn" id="2_ooffa"]
+[ext_resource type="Script" uid="uid://bnbo2q7p87pow" path="res://components/server_connection/enet_server.gd" id="3_sw6lo"]
+[ext_resource type="Script" uid="uid://6chdyvdnouf4" path="res://components/server_connection/server_connector.gd" id="4_t4jwi"]
 
 [node name="GameTree" type="Node"]
 
@@ -12,3 +14,11 @@
 [node name="PlayersMgr" type="Node" parent="."]
 
 [node name="Player" parent="PlayersMgr" instance=ExtResource("2_ooffa")]
+
+[node name="ServerInterface" type="Node" parent="."]
+
+[node name="EnetServer" type="Node" parent="ServerInterface"]
+script = ExtResource("3_sw6lo")
+
+[node name="ServerConnector" type="Node" parent="ServerInterface"]
+script = ExtResource("4_t4jwi")

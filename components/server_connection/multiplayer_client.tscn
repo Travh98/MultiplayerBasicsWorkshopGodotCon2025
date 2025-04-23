@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0klh1wf8gtol"]
+
+[ext_resource type="Script" uid="uid://c74ssebsn2nwj" path="res://components/server_connection/multiplayer_client.gd" id="1_j0r8q"]
+[ext_resource type="PackedScene" uid="uid://charavp71pvq6" path="res://entities/player.tscn" id="2_glb6p"]
+
+[node name="MultiplayerClient" type="Node3D"]
+script = ExtResource("1_j0r8q")
+
+[node name="Player" parent="." instance=ExtResource("2_glb6p")]
