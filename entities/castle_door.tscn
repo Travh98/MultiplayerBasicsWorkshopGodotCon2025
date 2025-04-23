@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbue422bqyjtx"]
+
+[ext_resource type="Texture2D" uid="uid://duln8g2kn8gbf" path="res://assets/kenney_assets/tile/medievalTile_02.png" id="1_aylb7"]
+[ext_resource type="Script" uid="uid://cdugv0uxucdi3" path="res://entities/castle_door.gd" id="1_wy2ja"]
+[ext_resource type="Texture2D" uid="uid://i8om7ox7xivg" path="res://assets/kenney_assets/tile/medievalTile_13.png" id="2_2htw3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0plpm"]
+size = Vector2(128, 64)
+
+[sub_resource type="Animation" id="Animation_2htw3"]
+resource_name = "open_door"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-102, -43)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.33686]
+}
+
+[sub_resource type="Animation" id="Animation_wy2ja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yolcc"]
+_data = {
+&"RESET": SubResource("Animation_wy2ja"),
+&"open_door": SubResource("Animation_2htw3")
+}
+
+[node name="CastleDoor" type="Node2D"]
+script = ExtResource("1_wy2ja")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_0plpm")
+
+[node name="DoorSprite" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(2, 1)
+texture = ExtResource("1_aylb7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D/DoorSprite"]
+position = Vector2(0, -29)
+scale = Vector2(1, 0.1)
+texture = ExtResource("2_2htw3")
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D/DoorSprite"]
+position = Vector2(0, 29)
+scale = Vector2(1, 0.1)
+texture = ExtResource("2_2htw3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yolcc")
+}
