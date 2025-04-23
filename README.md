@@ -4,6 +4,9 @@ We will start with a sample 2D top down game, and add multiplayer to it. If you 
 ## Adding Multiplayer
 We start with a player that can move around, but in order to get into the castle we need a friend to join our game and help us open the door.
 
+We will set up a Host / Client network relationship. This means the host (the person running the server) is also playing the game. The computers that connect to the server are called clients. 
+The host is essentially a client that is also responsible for owning the game state.
+
 ### 1. Set up our Game Tree
 For single player games we usually have the player as a node inside of the level. For multiplayer, we want our game level to be seperate from the player, so that we can spawn multiple players.
 
@@ -81,11 +84,18 @@ func _enter_tree():
 You can either add this code directly to your player.tscn scene, or the way I prefer to do it is have player.tscn be a child of a MultiplayerClient scene. 
 This way I can seperate the logic of setting multiplayer authority from the logic that drives my player.
 
-![Image of MultiplayerClients with Player scenes as childs in the Scene Tree]()
+![Image of MultiplayerClients with Player scenes as childs in the Scene Tree](documentation/3a_set_multiplayer_authority.png)
 
 It is also helpful to have a label that displays the peer_id of each player in game.
 
-![Image of peer_ids hovering above player's heads]()
+![Image of peer_ids hovering above player's heads](documentation/3_show_player_peer_ids.png)
+
+In order to make sure the camera of the player that we own is the camera that is active, add the following code to PlayerController.gd. This function will call make_current on the camera that belongs to our player.
+```
+func _ready():
+	if not is_multiplayer_authority(): return
+	camera_2d.make_current()
+```
 
 🤔 When moving the host, we also are moving the connected client's player on the host's game. 
 When moving the client, we don't seem to see the host's player. Where could the host's player be? (Answer: the host and the client are directly on top of each other).
@@ -111,3 +121,34 @@ Press the "+ Add property to sync" button and in the popup menu, select our Play
 The "Player:position" property will be added to the Replication tab, and you will see that it Always replicate.
 
 If you run the game now, you should see the positions of the players being synchronized across the network. Now your friend can help you open the castle door!
+
+### 5. Synchronize the Environment
+Now you'll notice the host can happily enter the castle once both players step on the buttons. However the door remains closed on the client's game! 
+We will need to sync the door being opened, as well as other things like player animations, the button animations, etc.
+- Sync the `visible` property of the Torch's FlameSprite Sprite2D
+- Sync the `current_animation` of the Player's AnimationPlayer
+- Sync the `current_animation` of the StandOnButton's AnimationPlayer
+- Sync the `is_open` variable of the Castle Door. In order to sync variables from scripts, you will have to add `@export` to export the variable before it is visible in the Replication tab.
+- Sync the `current_animation` of the Castle Door's AnimationPlayer node. ⚠ You might notice the Castle Door closes for the client. We can fix this later.
+
+The game will start to look more similar between the host and the client. 
+Let's take a look at the Godot Editor's Network Profiler. In the bottom of the bottom panel of the Editor, press the Debugger tab. Then at the top of that panel, you should see Network Profiler.
+Press the Start button on the Network Profiler and you will see how much data is being sent over the network.
+
+![Image of the Godot Editor's network profiler](documentation/5_network_profiler.png)
+
+The Down and Up indicators are showing how many Kibibytes (1024 bytes) per second you are sending to and from your client.
+We want to keep these numbers as low as possible. 
+Otherwise, our network could run out of bandwidth which would make player's games seem laggy and they could lose connection. 
+
+To optimize for network bandwidth, consider Synchronizing variables less frequently, or only when they change.
+For example our torch, buttons, and door variables do not get updated every frame, so let's set those variables to update only when they are changed.
+To do this, go back to each relevant MultiplayerSynchronizer and change the property's replicate setting from Always to On Change.
+Check how much this improves your bandwidth with the Network Profiler!
+
+📈 If you want to really optimize for bandwidth, you can change the Replication Interval of the Synchronizer to be much lower, then lerp the variable as it is updated.
+See my [NetPositionLerper in my FPS Deathmatch project](https://github.com/Travh98/fpsdeathmatch/tree/main/components/syncing_values).
+
+### 6. Use Remote Procedure Calls (RPCs) to Share Data
+todo...
+make RPC to trigger the door on clients
