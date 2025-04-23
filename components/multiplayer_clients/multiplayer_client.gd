@@ -24,5 +24,6 @@ func _ready():
 	player.name = str(peer_id)
 	
 	# Set the debug label on the player for seeing Peer ID 
-	if player.has_node("PanelContainer/MarginContainer/VBoxContainer/PeerIdLabel"):
-		player.get_node("PanelContainer/MarginContainer/VBoxContainer/PeerIdLabel").text = player.name
+	if player.has_node("PlayerController"):
+		var player_controller: PlayerController = player.get_node("PlayerController")
+		player_controller.peer_id_label.text = player.name

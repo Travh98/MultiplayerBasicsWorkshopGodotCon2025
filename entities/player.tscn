@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://01tmnbmsfsnf"]
+[gd_scene load_steps=9 format=3 uid="uid://01tmnbmsfsnf"]
 
 [ext_resource type="Texture2D" uid="uid://cp7fkap7ipwg2" path="res://assets/kenney_assets/characters/character_maleAdventurer_idle.png" id="1_merdl"]
 [ext_resource type="Script" uid="uid://laaa2vdnnx3f" path="res://entities/player_controller.gd" id="2_b0kkn"]
@@ -98,6 +98,11 @@ _data = {
 &"walking": SubResource("Animation_rfe5m")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_b0kkn"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 
@@ -145,3 +150,6 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Peer Id"
 horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_b0kkn")

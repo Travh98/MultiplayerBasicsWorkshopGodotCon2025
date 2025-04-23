@@ -5,7 +5,9 @@ extends Node
 
 @onready var player: CharacterBody2D = $".."
 @onready var anim_player: AnimationPlayer = $"../AnimationPlayer"
-@onready var player_name_label: Label = $"../PanelContainer/MarginContainer/PlayerNameLabel"
+@onready var player_name_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PlayerNameLabel"
+@onready var peer_id_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PeerIdLabel"
+
 
 ## Speed of the player in pixels per second
 @export var speed: float = 200.0
@@ -16,8 +18,10 @@ func _ready():
 
 
 func _physics_process(_delta: float):
-	var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", 
-		"move_down").normalized()
+	if not is_multiplayer_authority(): return
+	
+	var direction: Vector2 = Input.get_vector("move_left", "move_right", 
+		"move_up", "move_down").normalized()
 	
 	player.velocity = direction * speed
 	player.move_and_slide()
