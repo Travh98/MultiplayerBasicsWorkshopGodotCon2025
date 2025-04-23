@@ -8,13 +8,13 @@ signal disconnected_from_server()
 
 @onready var enet_server: EnetServer = $EnetServer
 @onready var server_connector: ServerConnector = $ServerConnector
-@onready var ping_mgr: PingMgr = $PingMgr
-@onready var connection_timeout: ConnectionTimeout = $ConnectionTimeout
+#@onready var ping_mgr: PingMgr = $PingMgr
+#@onready var connection_timeout: ConnectionTimeout = $ConnectionTimeout
 
 
 func _ready():
-	connection_timeout.lost_heartbeat_connection.connect(server_connector.disconnect_from_server)
-	server_connector.server_connection_changed.connect(ping_mgr.on_server_connection_changed)
+	#connection_timeout.lost_heartbeat_connection.connect(server_connector.disconnect_from_server)
+	#server_connector.server_connection_changed.connect(ping_mgr.on_server_connection_changed)
 	server_connector.server_connection_changed.connect(server_connection_changed)
 
 

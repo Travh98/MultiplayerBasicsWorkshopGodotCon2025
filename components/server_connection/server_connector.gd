@@ -35,11 +35,12 @@ func connect_to_server():
 	
 	multiplayer.connection_failed.connect(on_connection_failed)
 	multiplayer.connected_to_server.connect(on_connection_success)
+	
+	print("Connecting to server at address: ", host_ip, ":", port)
 
 
 ## Disconnects from the server
 func disconnect_from_server():
-	#GameMgr.game_tree.player_mgr.delete_all_players()
 	if not is_server_connected:
 		return
 	is_server_connected = false
@@ -57,15 +58,13 @@ func on_connection_failed():
 	var time_spent_joining: float = Time.get_unix_time_from_system() - last_join_attempt_time_secs
 	print("Connection failed after ", str(time_spent_joining), " seconds.")
 	connection_failed_after_secs.emit(time_spent_joining)
-	#GameMgr.game_tree.gui_mgr.on_connection_failed()
 	disconnect_from_server()
 
 
 ## Handles when connection to server succeeds
 func on_connection_success():
 	is_server_connected = true
-	print("Client successfully connected!")
-	#GameMgr.game_tree.gui_mgr.on_connection_success()
+	print("Connected to Server!")
 
 
 ## Handles updating the server connection status

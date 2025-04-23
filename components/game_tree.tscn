@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://xhma3wlrqehr"]
+[gd_scene load_steps=9 format=3 uid="uid://xhma3wlrqehr"]
 
+[ext_resource type="Script" uid="uid://bwrkj6u6sgcvl" path="res://components/game_tree.gd" id="1_ar0u2"]
 [ext_resource type="PackedScene" uid="uid://bbt71rqh7m6g5" path="res://levels/castle_level.tscn" id="1_q3u5y"]
 [ext_resource type="PackedScene" uid="uid://01tmnbmsfsnf" path="res://entities/player.tscn" id="2_ooffa"]
 [ext_resource type="Script" path="res://ui/gui_mgr.gd" id="3_g7dyb"]
 [ext_resource type="Script" uid="uid://bnbo2q7p87pow" path="res://components/server_connection/enet_server.gd" id="3_sw6lo"]
 [ext_resource type="PackedScene" uid="uid://cnc7h6xdn8j2b" path="res://ui/start_connect_menu.tscn" id="4_qu4p1"]
 [ext_resource type="Script" uid="uid://6chdyvdnouf4" path="res://components/server_connection/server_connector.gd" id="4_t4jwi"]
+[ext_resource type="Script" uid="uid://bua46w4qkhr2v" path="res://components/server_connection/server_interface.gd" id="6_qq8b4"]
 
 [node name="GameTree" type="Node"]
+script = ExtResource("1_ar0u2")
 
 [node name="Level" type="Node" parent="."]
 
@@ -23,6 +26,7 @@ script = ExtResource("3_g7dyb")
 [node name="StartConnectMenu" parent="GuiMgr" instance=ExtResource("4_qu4p1")]
 
 [node name="ServerInterface" type="Node" parent="."]
+script = ExtResource("6_qq8b4")
 
 [node name="EnetServer" type="Node" parent="ServerInterface"]
 script = ExtResource("3_sw6lo")
