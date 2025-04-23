@@ -4,6 +4,21 @@
 [ext_resource type="Script" uid="uid://jlprxag0dt5k" path="res://entities/torch.gd" id="1_kyii1"]
 [ext_resource type="Texture2D" uid="uid://bw4nd1h4wwfub" path="res://assets/kenney_assets/explosion/explosion03.png" id="2_kyii1"]
 
+[sub_resource type="Animation" id="Animation_ostqq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlameSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+
 [sub_resource type="Animation" id="Animation_kyii1"]
 resource_name = "torch_burning"
 loop_mode = 1
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.1, 0.1), Vector2(0.1, 0.12), Vector2(0.1, 0.1)]
-}
-
-[sub_resource type="Animation" id="Animation_ostqq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlameSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.1, 0.1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4irgs"]
