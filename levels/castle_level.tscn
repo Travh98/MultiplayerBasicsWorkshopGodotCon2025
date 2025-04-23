@@ -1,14 +1,16 @@
-[gd_scene load_steps=18 format=4 uid="uid://bbt71rqh7m6g5"]
+[gd_scene load_steps=20 format=4 uid="uid://bbt71rqh7m6g5"]
 
 [ext_resource type="Texture2D" uid="uid://duln8g2kn8gbf" path="res://assets/kenney_assets/tile/medievalTile_02.png" id="1_g7e1c"]
 [ext_resource type="Texture2D" uid="uid://i8om7ox7xivg" path="res://assets/kenney_assets/tile/medievalTile_13.png" id="2_acswp"]
 [ext_resource type="Texture2D" uid="uid://bcv2d2fvfo4og" path="res://assets/kenney_assets/tile/medievalTile_16.png" id="3_wwbr7"]
 [ext_resource type="Texture2D" uid="uid://bwrhh5god2r4n" path="res://assets/kenney_assets/tile/medievalTile_58.png" id="4_odn2x"]
-[ext_resource type="PackedScene" uid="uid://01tmnbmsfsnf" path="res://entities/player.tscn" id="5_acswp"]
 [ext_resource type="Texture2D" uid="uid://bwxb6mgd6s13a" path="res://assets/kenney_assets/tile/castle_wall_tile.png" id="6_wwbr7"]
 [ext_resource type="PackedScene" uid="uid://dbue422bqyjtx" path="res://entities/castle_door.tscn" id="7_xdrij"]
 [ext_resource type="PackedScene" uid="uid://dmk068mfcujh2" path="res://entities/torch.tscn" id="8_hbrdc"]
+[ext_resource type="Texture2D" uid="uid://8r30s7tfei70" path="res://assets/treasure_chest.png" id="9_gr24r"]
 [ext_resource type="PackedScene" uid="uid://bmqlu7fe6kdui" path="res://entities/stand_on_button.tscn" id="9_hbrdc"]
+[ext_resource type="Texture2D" uid="uid://baxb5jy38t5bl" path="res://assets/kenney_assets/environment/medievalEnvironment_03.png" id="10_35s27"]
+[ext_resource type="Texture2D" uid="uid://di4rmi4val7yk" path="res://assets/kenney_assets/environment/medievalEnvironment_01.png" id="11_r18t8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g7e1c"]
 texture = ExtResource("1_g7e1c")
@@ -83,4 +85,72 @@ position = Vector2(-127, -64)
 [node name="StandOnButton2" parent="." instance=ExtResource("9_hbrdc")]
 position = Vector2(513, -64)
 
-[node name="Player" parent="." instance=ExtResource("5_acswp")]
+[node name="TreasureChest" type="Sprite2D" parent="."]
+position = Vector2(191, -641)
+texture = ExtResource("9_gr24r")
+
+[node name="Forest" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Forest"]
+position = Vector2(-345, -225)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Forest"]
+position = Vector2(629, -326)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Forest"]
+position = Vector2(679, 184)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Forest"]
+position = Vector2(-24, 237)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Forest"]
+position = Vector2(-203, 574)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Forest"]
+position = Vector2(979, 572)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Forest"]
+position = Vector2(281, 717)
+texture = ExtResource("10_35s27")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Forest"]
+position = Vector2(127, 492)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Forest"]
+position = Vector2(735, 400)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Forest"]
+position = Vector2(-370, 117)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Forest"]
+position = Vector2(987, 74)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Forest"]
+position = Vector2(884, -372)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Forest"]
+position = Vector2(657, -714)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D14" type="Sprite2D" parent="Forest"]
+position = Vector2(-245, -604)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D15" type="Sprite2D" parent="Forest"]
+position = Vector2(-608, -446)
+texture = ExtResource("11_r18t8")
+
+[node name="Sprite2D16" type="Sprite2D" parent="Forest"]
+position = Vector2(-528, -58)
+texture = ExtResource("11_r18t8")
