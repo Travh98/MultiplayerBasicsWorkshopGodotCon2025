@@ -5,7 +5,9 @@ extends Node
 
 @onready var player: CharacterBody2D = $".."
 @onready var anim_player: AnimationPlayer = $"../AnimationPlayer"
-@onready var player_name_label: Label = $"../PanelContainer/MarginContainer/PlayerNameLabel"
+@onready var player_name_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PlayerNameLabel"
+@onready var peer_id_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PeerIdLabel"
+
 
 ## Speed of the player in pixels per second
 @export var speed: float = 200.0
