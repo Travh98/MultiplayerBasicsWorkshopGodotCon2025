@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
+var is_open: bool = false
 
 func _ready():
 	if not is_multiplayer_authority(): return
@@ -20,5 +21,9 @@ func _ready():
 func _physics_process(_delta: float):
 	if not is_multiplayer_authority(): return
 	
+	if is_open:
+		return
+	
 	if torch1.is_lit and torch2.is_lit:
 		anim_player.play("open_door")
+		is_open = true
