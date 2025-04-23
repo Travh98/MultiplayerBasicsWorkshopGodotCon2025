@@ -28,7 +28,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "FPS Deathmatch"
+text = "Multiplayer Basics Workshop for GodotCon Boston 2025"
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -45,6 +45,7 @@ layout_mode = 2
 placeholder_text = "your name"
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
@@ -59,7 +60,7 @@ columns = 4
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GridContainer"]
 layout_mode = 2
-text = "hOST gAME"
+text = "Host Game"
 
 [node name="seperator" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GridContainer"]
 layout_mode = 2
@@ -75,7 +76,7 @@ text = "Host"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GridContainer"]
 layout_mode = 2
-text = "join gamME"
+text = "Join Game"
 
 [node name="JoinIp" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(200, 0)
