@@ -8,6 +8,7 @@ extends Node
 @onready var player_name_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PlayerNameLabel"
 @onready var peer_id_label: Label = $"../PanelContainer/MarginContainer/VBoxContainer/PeerIdLabel"
 @onready var camera_2d: Camera2D = $"../Camera2D"
+@onready var player_sprite: Sprite2D = $"../PlayerSprite"
 
 
 ## Speed of the player in pixels per second
@@ -25,6 +26,11 @@ func _physics_process(_delta: float):
 	
 	var direction: Vector2 = Input.get_vector("move_left", "move_right", 
 		"move_up", "move_down").normalized()
+	
+	if direction.x > 0:
+		player_sprite.flip_h = true
+	if direction.x < 0:
+		player_sprite.flip_h = false
 	
 	player.velocity = direction * speed
 	player.move_and_slide()

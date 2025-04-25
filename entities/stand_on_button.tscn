@@ -1,7 +1,22 @@
 [gd_scene load_steps=8 format=3 uid="uid://bmqlu7fe6kdui"]
 
 [ext_resource type="Script" uid="uid://cptxv4baw3i6y" path="res://entities/stand_on_button.gd" id="1_d62mg"]
-[ext_resource type="Texture2D" uid="uid://cio8uvnpg56j0" path="res://icon.svg" id="1_ng5be"]
+[ext_resource type="Texture2D" uid="uid://b81a3btscbuoa" path="res://assets/button.png" id="2_d62mg"]
+
+[sub_resource type="Animation" id="Animation_d62mg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BehindSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_d62mg"]
 length = 0.001
@@ -54,11 +69,11 @@ script = ExtResource("1_d62mg")
 
 [node name="BehindSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("1_ng5be")
+texture = ExtResource("2_d62mg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_ng5be")
+texture = ExtResource("2_d62mg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

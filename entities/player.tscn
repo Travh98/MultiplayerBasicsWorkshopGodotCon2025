@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://01tmnbmsfsnf"]
+[gd_scene load_steps=8 format=3 uid="uid://01tmnbmsfsnf"]
 
 [ext_resource type="Texture2D" uid="uid://ddf0nv4i304v7" path="res://assets/godotcon_assets/godoot_sprite.png" id="1_b0kkn"]
 [ext_resource type="Script" uid="uid://laaa2vdnnx3f" path="res://entities/player_controller.gd" id="2_b0kkn"]
@@ -8,16 +8,88 @@ radius = 29.0
 
 [sub_resource type="Animation" id="Animation_e4p34"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, -6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_b0kkn"]
 resource_name = "idle"
 length = 2.0
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, -6), Vector2(3, -6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_rfe5m"]
 resource_name = "walking"
 length = 1.5
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.32, 0.69, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, -6), Vector2(3, -28), Vector2(3, -6), Vector2(4, -18), Vector2(3, -6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.32, 0.69, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0174548, 0.261799, 0.0174548, -0.349066, 0.0174548]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rfe5m"]
 _data = {
@@ -26,19 +98,12 @@ _data = {
 &"walking": SubResource("Animation_rfe5m")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_b0kkn"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("AnimationPlayer:current_animation")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(1, 0.537255, 0.278431, 1)
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.619608, 0.2, 1)
+position = Vector2(3, -6)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_b0kkn")
 
@@ -82,6 +147,3 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Peer Id"
 horizontal_alignment = 1
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_b0kkn")
