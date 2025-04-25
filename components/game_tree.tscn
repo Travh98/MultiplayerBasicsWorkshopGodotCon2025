@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://xhma3wlrqehr"]
 
-[ext_resource type="Script" uid="uid://bwrkj6u6sgcvl" path="res://components/game_tree.gd" id="1_ar0u2"]
+[ext_resource type="Script" path="res://components/game_tree.gd" id="1_ar0u2"]
 [ext_resource type="PackedScene" uid="uid://bbt71rqh7m6g5" path="res://levels/castle_level.tscn" id="1_q3u5y"]
 [ext_resource type="Script" uid="uid://cb4r2ddu3kuou" path="res://components/multiplayer_state_mgmt/players_mgr.gd" id="3_ar0u2"]
 [ext_resource type="Script" path="res://ui/gui_mgr.gd" id="3_g7dyb"]
