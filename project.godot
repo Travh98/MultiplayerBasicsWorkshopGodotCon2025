@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="MultiplayerWorkshopGodotCon"
+config/name="Simple 2D Multiplayer Basics Workshop - GodotCon Boston 2025 "
+config/description="A simple 2d project built for the Multiplayer Basics Workshop at GodotCon Boston 2025 by Travh98."
 run/main_scene="uid://xhma3wlrqehr"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cqrwinevedcil"
 
 [autoload]
 
