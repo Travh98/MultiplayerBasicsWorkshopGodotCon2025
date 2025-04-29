@@ -151,4 +151,4 @@ See my [NetPositionLerper in my FPS Deathmatch project](https://github.com/Travh
 
 ### 6. Use Remote Procedure Calls (RPCs) to Share Data
 todo...
-make RPC to trigger the door on clients
+make RPC to send text chat in game
