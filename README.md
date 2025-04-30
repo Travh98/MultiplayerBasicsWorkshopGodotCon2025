@@ -181,7 +181,7 @@ todo...
 make RPC to send text chat in game
 
 ### 7. 🎉 Recap / Conclusion / Additional Resources
-You know should know how to:
+You now should be confident on how to:
 - connect two or more computers over an internet connection with one person hosting a server
 - spawn and synchronize characters for each player
 - synchronize world level elements across each client
