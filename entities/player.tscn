@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ddf0nv4i304v7" path="res://assets/godotcon_assets/godoot_sprite.png" id="1_b0kkn"]
 [ext_resource type="Script" uid="uid://laaa2vdnnx3f" path="res://entities/player_controller.gd" id="2_b0kkn"]
+[ext_resource type="PackedScene" uid="uid://bd32y81wfxa4l" path="res://ui/chat_ui.tscn" id="3_e4p34"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wwbr7"]
 radius = 29.0
@@ -127,6 +128,8 @@ script = ExtResource("2_b0kkn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
+
+[node name="ChatUi" parent="Camera2D" instance=ExtResource("3_e4p34")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
