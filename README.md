@@ -18,8 +18,8 @@ First, in the Game tab of the Godot Editor, **disable the "Embed Game on Next Pl
 In the Godot Editor, in the top left menu, go to Debug > Customize Run Instances. 
 Check the box to enable multiple instances and set the number to 2 instances. When you run the game next, two windows of your game should pop up.
 
-Note that this project has the tile-instances addon installed, so the two windows should spawn side by side, helpful for rapid prototyping!
-You will also probably want to disable the "Embed Game on Next Play" setting in the Game tab of the Godot Editor. 
+Note that this project has the [tile-instances](https://gist.github.com/mrcdk/3c22d91a3b4fb784d5df60667a33cf1e) addon installed, so the two windows should spawn side by side, helpful for rapid prototyping! 
+Otherwise you'd have to move the windows around every time you run the game.
 
 ### 2. Connect the Computers over the Network
 To connect from one computer to the other, we will set up a host & client relationship. Our host will create a ENet server and our client will connect to the host.
@@ -35,7 +35,7 @@ Create a node named ServerConnector. This node will have the logic for connectin
 
 ![Server Interface in the Scene Tree](documentation/2_server_interface.png)
 
-When the host wants to start their server, through the EnetServer node they create a ENetMultiplayerPeer and call the `create_server(port, max_players)` function on it. They then store the newly created ENet peer in their `multiplayer` [MultiplayerAPI instance](https://docs.godotengine.org/en/4.4/classes/class_multiplayerapi.html#class-multiplayerapi). 
+When the host wants to start their server, through the EnetServer node they create a ENetMultiplayerPeer and call the `create_server(port, max_players)` function on it. They then store the newly created ENet peer in their `multiplayer` [MultiplayerAPI instance](https://docs.godotengine.org/en/latest/classes/class_multiplayerapi.html). 
 
 ⚠ NOTE: To allow clients to connect from other networks (not LAN) you will need to port forward the port you are hosting on.
 
@@ -63,7 +63,9 @@ Our PlayersMgr node will be responsible for spawning the player scenes.
 We listen for the `peer_connected` and `peer_disconnected` signals from the MultiplayerAPI instance. When a peer is connected, we instantiate our player scene as a child of PlayersMgr. 
 The MultiplayerSpawner will see this new player scene was added, and will replicate it across to all the clients.
 
-Additionally we will want to connect a signal from our EnetServer node, so that when we start hosting our server we can tell PlayersMgr to spawn a player for the host. Otherwise PlayersMgr will only spawn players for clients.
+Additionally we will want to connect a signal from our EnetServer node, so that when we start hosting our server we can tell PlayersMgr to spawn a player for the host. 
+As the host, when we join we will not receive a `peer_connected` signal since we are already connected to our computer that is hosting. 
+Therefore we would be missing a player for the host to play as.
 
 Every client who connects to the server will have a unique **peer_id**. 
 When spawning the player characters, we want to make sure that each player node's name matches the peer_id, so we can keep track of what client is controlling which player.
@@ -85,11 +87,15 @@ We can also ignore any physics_process calculations if we know that data will be
 On each player character scene, we want to set the multiplayer authority as soon as they enter the tree.
 ```
 func _enter_tree():
+	# We set the name of the player's node as the peer_id when they connect,
+	# so we can use it here to define who has control over this player.
 	var peer_id: int = str(name).to_int()
 	set_multiplayer_authority(peer_id)
 ```
 You can either add this code directly to your player.tscn scene, or the way I prefer to do it is have player.tscn be a child of a MultiplayerClient scene. 
 This way I can seperate the logic of setting multiplayer authority from the logic that drives my player.
+
+This image below shows the Player's CharacterBody2D as a child of a MultiplayerClient node with the same peer_id name.
 
 ![Image of MultiplayerClients with Player scenes as childs in the Scene Tree](documentation/3a_set_multiplayer_authority.png)
 
@@ -120,10 +126,12 @@ func _physics_process(_delta: float):
 🔨 During debugging, to see what is happening on each client's scene tree, you can switch to the Remote tab of the Scene inspector. 
 By default you will just see one of the client's remote scene tree, but if you have the Debugger panel open you can switch between the Sessions, so you can see what the other client's scene trees look like at runtime.
 
-~[Switching between remote scene trees of seperate clients](documentation/4_switching_sessions_remote_scene_tree.png)
+![Switching between remote scene trees of seperate clients](documentation/4_switching_sessions_remote_scene_tree.png)
 
 Now we can make sure we are only controlling the player we own!
 But our connected peers seem to sit still. Let's start synchronizing their movement!
+
+If you see this error: `on_spawn_receive: Condition "parent->has_node(name)" is true. Returning: ERR_INVALID_DATA`, you can ignore it.
 
 ### 4. Synchronizing Movement
 To synchronize (AKA share, copy, replicate) variables across the network, we can use the [MultiplayerSynchronizer](https://docs.godotengine.org/en/stable/classes/class_multiplayersynchronizer.html) node.
@@ -134,6 +142,8 @@ Press the "+ Add property to sync" button and in the popup menu, select our Play
 The "Player:position" property will be added to the Replication tab, and you will see that it Always replicate.
 
 If you run the game now, you should see the positions of the players being synchronized across the network. Now your friend can help you open the castle door!
+
+![Synchronizing variables on the Player scene](documentation/4_replication.png)
 
 ⚠ Note that in order for the Multiplayer Synchronizer to work, the node that it is syncing MUST have the same scene tree path on both clients! 
 If you are syncing the movement of the host's character that is in the scene tree at: `root/GameTree/PlayersMgr/1/1`, then there must be a character on the other client's game at the same path!
