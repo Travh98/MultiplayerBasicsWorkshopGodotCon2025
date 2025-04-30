@@ -156,7 +156,7 @@ We will need to sync the door being opened, as well as other things like player 
 - Sync the `current_animation` of the Player's AnimationPlayer
 - Sync the `current_animation` of the StandOnButton's AnimationPlayer
 - Sync the `is_open` variable of the Castle Door. In order to sync variables from scripts, you will have to add `@export` to export the variable before it is visible in the Replication tab.
-- Sync the `current_animation` of the Castle Door's AnimationPlayer node. ⚠ You might notice the Castle Door closes for the client. We can fix this later.
+- Sync the `position` and `rotation` of the Castle Door's StaticBody2D node.
 
 The game will start to look more similar between the host and the client. 
 Let's take a look at the Godot Editor's Network Profiler. In the bottom of the bottom panel of the Editor, press the Debugger tab. Then at the top of that panel, you should see Network Profiler.
