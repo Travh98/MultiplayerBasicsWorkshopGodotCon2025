@@ -21,6 +21,7 @@ config/icon="uid://cqrwinevedcil"
 
 TileInstancesGlobal="*res://addons/tile-instances/tile_instances_global.gd"
 ClientGlobals="*res://components/globals/client_globals.gd"
+ServerChatRpc="*res://components/server_chat_rpc.gd"
 
 [editor_plugins]
 
