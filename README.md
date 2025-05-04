@@ -177,8 +177,41 @@ Check how much this improves your bandwidth with the Network Profiler!
 See my [NetPositionLerper in my FPS Deathmatch project](https://github.com/Travh98/fpsdeathmatch/tree/main/components/syncing_values).
 
 ### 6. Use Remote Procedure Calls (RPCs) to Share Data
-todo...
-make RPC to send text chat in game
+You can do a lot with just MultiplayerSynchronizer, but if you want to send and receive more advanced data you can use RPC Functions.
+RPC Functions (Remote Procedure Functions) are functions that you can run on other people's computers.
+We will add multiplayer to the Chat UI system using RPC functions.
+
+In our `ui/chat_ui.gd` script we have a function called `receive_message`, which takes in a string and adds it to the chat log.
+We want to change the code so that when we call the `send_message` function, we are also remotely calling the `receive_message` function on our peer's computers.
+This is how we can send larger and more complex data across the network.
+
+In the `components/server_chat_rpc.gd` script I have the basics set up for a autoloaded script will hold our RPC functions related to chat.
+When `ServerChatRpc.receive_message` is called, ServerChatRpc emits the `msg_received` signal to tell the ChatUI that a new message has come in.
+You can see that `chat_ui.gd` is already connected to the ServerChatRpc autoload, in its `_ready()` function.
+
+To make the `ServerChatRpc.receive_message` function able to be called remotely from other computers, we need to define the function as an RPC function.
+Add `@rpc()` on the line above the function, and add the following settings: `"any_peer", "reliable", "call_local"`
+```
+## Call this function on the peer's computer to
+## make them receive your message
+@rpc("any_peer", "reliable", "call_local")
+func receive_message(msg: String):
+	msg_received.emit(msg)
+	pass
+```
+
+`any_peer` means anyone can call it, not just the host.
+`reliable` mean that this message will send until the receiver gets the message and says that they got it.
+`call_local` means that this function will run on their computer and also on this computer too.
+
+Now that we have enabled this function to be called remotely, lets change the `send_message` function from Chat UI to instead call `ServerChatRpc.receive_message` on every connected peer.
+```
+var msg: String = typing_msg_line_edit.text
+ServerChatRpc.receive_message.rpc(msg)
+```
+
+You'll notice that instead of just calling `ServerChatRpc.receive_message(msg)`, we are calling the RPC of that function, and still pass in our `msg` as the function argument.
+You should now be able to press T to type and Enter to send messages to every connected peer!
 
 ### 7. 🎉 Recap / Conclusion / Additional Resources
 You now should be confident on how to:
