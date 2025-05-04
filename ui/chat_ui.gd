@@ -13,6 +13,8 @@ func _ready():
 	chat_log.text = ""
 	
 	typing_msg_line_edit.editing_toggled.connect(on_editing_toggled)
+
+	ServerChatRpc.msg_received.connect(receive_message)
 	pass
 
 
@@ -36,15 +38,10 @@ func send_message():
 	if typing_msg_line_edit.text.is_empty():
 		return
 	
-	receive_message(typing_msg_line_edit.text)
-	#new_chat_msg.rpc(typing_msg_line_edit.text)
+	var msg: String = typing_msg_line_edit.text
+	receive_message(msg)
 	
 	typing_msg_line_edit.clear()
-
-
-#@rpc("any_peer", "call_local", "reliable")
-#func new_chat_msg(msg: String):
-	#receive_message(msg)
 
 
 func receive_message(msg: String):
