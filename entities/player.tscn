@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://01tmnbmsfsnf"]
+[gd_scene load_steps=10 format=3 uid="uid://01tmnbmsfsnf"]
 
 [ext_resource type="Texture2D" uid="uid://ddf0nv4i304v7" path="res://assets/godotcon_assets/godoot_sprite.png" id="1_b0kkn"]
 [ext_resource type="Script" uid="uid://laaa2vdnnx3f" path="res://entities/player_controller.gd" id="2_b0kkn"]

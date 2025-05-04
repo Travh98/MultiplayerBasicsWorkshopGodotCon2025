@@ -18,7 +18,7 @@ func _ready():
 	pass
 
 
-func _physics_process(delta):
+func _physics_process(_delta: float):
 	if Input.is_action_just_pressed("enter"):
 		send_message()
 		stop_chat.emit()
@@ -39,7 +39,7 @@ func send_message():
 		return
 	
 	var msg: String = typing_msg_line_edit.text
-	receive_message(msg)
+	ServerChatRpc.receive_message.rpc(msg)
 	
 	typing_msg_line_edit.clear()
 

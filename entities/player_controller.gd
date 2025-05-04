@@ -18,7 +18,9 @@ var can_move: bool = true
 
 
 func _ready():
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): 
+		chat_ui.queue_free()
+		return
 	camera_2d.make_current()
 
 	if chat_ui != null:

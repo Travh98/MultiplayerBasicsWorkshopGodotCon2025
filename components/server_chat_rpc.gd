@@ -8,6 +8,7 @@ signal msg_received(msg: String)
 
 ## Call this function on the peer's computer to
 ## make them receive your message
+@rpc("any_peer", "reliable", "call_local")
 func receive_message(msg: String):
 	msg_received.emit(msg)
 	pass
